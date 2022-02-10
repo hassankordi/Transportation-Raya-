@@ -1,0 +1,105 @@
+<div class="graph-route" style="height: 100%; width: 100%">
+    <div
+      class="filter"
+      style="
+        height: 50px;
+        width: 100% !important;
+        padding: 10px;
+        display: flex;
+        border-bottom: 1px solid lightgray;
+      "
+    >
+      <div
+        class=""
+        style="
+          width: auto;
+          line-height: 30px;
+          margin: 5px 30px;
+          font-size: 1.1rem;
+          font-weight: 600;
+        "
+      >
+        Filter :
+      </div>
+      <div class="" style="width: 200px">
+        <ejs-dropdownlist
+          id="ddlelement"
+          #samples
+          [dataSource]="filter"
+          placeholder="Compare to"
+          (change)="onChange($event)"
+        >
+  
+  
+      </ejs-dropdownlist>
+  
+  
+  
+      </div>
+  
+       <!-- start -->
+       <div fxLayout="row pr-2" >
+        
+            <div>
+              <mat-form-field >
+                <mat-label>Duration</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let elem of selectValues" [value]="elem.value" (click)="optionValue(elem.value)">
+                    {{elem.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div  class="searchBtn">
+              <button mat-button (click)="onSearch()">Search</button>
+            </div>
+        </div>
+      <!-- end -->
+    </div>
+    <div class="row">
+      <div class="" style="height: 100%; width: 75%;" *ngIf="chartflag == true">
+        <ejs-chart
+          #chartcolumn
+          style="height: inherit !important"
+          [chartArea]="chartArea"
+          width="100%"
+          align="center"
+          id="chartcontainer"
+          [primaryXAxis]="primaryXAxis"
+          [primaryYAxis]="primaryYAxis"
+          title="Route"
+          [tooltip]="tooltip"
+          (load)="load($event)"
+        >
+          <e-series-collection>
+            <e-series
+              [dataSource]="graph"
+              type="Column"
+              fill="#08415C "
+              xName="day"
+              [yName]="yName"
+              width="2"
+              [cornerRadius]="radius"
+              columnWidth="0.05"
+            >
+            </e-series>
+          </e-series-collection>
+        </ejs-chart>
+      </div>
+      <div class="" style="width: 25%; height: 100%;">
+        <ejs-grid
+          #contain
+          [dataSource]="grid"
+          allowPaging="true"
+          height="100%"
+          [pageSettings]="initialPage"
+        >
+          <e-columns>
+            <e-column field="name" headerText="Route"></e-column>
+            <e-column  [field]="compairData" [headerText]="compairName"></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+  </div>
+  

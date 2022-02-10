@@ -1,0 +1,10 @@
+.map-active{
+    display: flex;
+    height: 100vh;
+    overflow: auto;
+    .map-to-active{
+        margin-top: 10px;
+        width: 75%;
+        height: calc(100vh - 130px);
+    }
+}

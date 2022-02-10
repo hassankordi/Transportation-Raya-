@@ -1,0 +1,224 @@
+<!-- <div class="control-section m-1">
+  <ejs-grid
+    #mastergrid
+    id="mastergrid"
+    [dataSource]="childMessage"
+    height="100%"
+    [selectedRowIndex]="0"
+    (rowSelected)="onRowSelected($event)"
+  >
+    <e-columns>
+      <e-column field="id" headerText="Trip ID"></e-column>
+      <e-column field="startTimeStamp" headerText="Date"></e-column>
+      <e-column field="terminalID" headerText="Bus ID"></e-column>
+      <e-column field="routID" headerText="Route ID"></e-column>
+      <e-column field="passengerCount" headerText="Passenger Count"></e-column>
+    </e-columns>
+  </ejs-grid>
+</div> -->
+
+<ejs-grid
+  #overviewgrid
+  id="overviewgrid"
+  [dataSource]="childMessage"
+  rowHeight="38"
+  [allowSelection]="true"
+  [allowSorting]="true"
+  [enableHeaderFocus]="true"
+  [filterSettings]="filterSettings"
+  [allowSorting]="true"
+  [allowFiltering]="true"
+  height="100%"
+  (rowSelected)="onRowSelected($event)"
+  allowPaging="true"
+  [pageSettings]="initialPage"
+  *ngIf="!flag"
+>
+  <e-columns>
+    <!-- [visible]="false" -->
+    <e-column
+      field="tripID"
+      headerText="Trip ID"
+      [isPrimaryKey]="true"
+    ></e-column>
+    <e-column field="bus" headerText="Vehicle"></e-column>
+    <e-column field="rout" headerText="Route"></e-column>
+    <e-column
+      field="passengerCount"
+      headerText="Passenger Count"
+      [filter]="filter"
+      clipMode="EllipsisWithTooltip"
+    >
+    </e-column>
+    <e-column
+      field="driver"
+      headerText="Driver"
+      [filter]="filter"
+      clipMode="EllipsisWithTooltip"
+    ></e-column>
+    <e-column
+      field="maxSpeed"
+      headerText="Max Speed"
+      [filter]="filterSettings"
+    ></e-column>
+
+    <e-column field="Status" [filter]="filter" headerText="Status" width="150">
+      <ng-template #template let-data>
+        <div
+          *ngIf="data.status != 'Ended'; else login"
+          class="statustemp e-activecolor"
+        >
+          <span class="statustxt e-activecolor">{{ data.status }}</span>
+        </div>
+        <ng-template #login>
+          <div class="statustemp e-inactivecolor">
+            <span class="statustxt e-inactivecolor">{{ data.status }}</span>
+          </div>
+        </ng-template>
+      </ng-template>
+    </e-column>
+  </e-columns>
+</ejs-grid>
+
+<div class="trip" *ngIf="flag">
+  <div class="trip-data row">
+    <div class="col-4 row">
+      <div class="col-5 data-title">Trip ID</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].tripID }}</div>
+      <div class="col-5 data-title">Route</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].rout }}</div>
+      <div class="col-5 data-title">Vehicle</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].bus }}</div>
+      <div class="col-5 data-title">Status</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].status }}</div>
+
+
+      <div class="col-5 data-title">Camera</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].cam_UltraCount.cameraCount }}</div>
+      
+    </div>
+    <div class="col-4 row">
+      <div class="col-5 data-title">Start Time</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">
+        {{ TripData[0].startTime | date: "shortTime" }}
+      </div>
+      <div class="col-5 data-title" *ngIf="TripData[0].endTime">End Time</div>
+      <div class="col-1 data-title" *ngIf="TripData[0].endTime">:</div>
+      <div class="col-6 data-info" *ngIf="TripData[0].endTime">
+        {{ TripData[0].endTime | date: "shortTime" }}
+      </div>
+      <div class="col-5 data-title">Duration</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">
+        {{ TripData[0].duration  }}
+      </div>
+      <div class="col-5 data-title">Assign Date</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">
+        {{ TripData[0].assignTime | date: "d/M/y" }}
+      </div>
+      <div class="col-5 data-title">Driver</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].driver }}</div>
+
+
+      <div class="col-5 data-title">Flow In</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].cam_UltraCount.ultraCountIN }}</div>
+    </div>
+    <div class="col-4 row">
+      <div class="col-5 data-title">Passengers</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].passengerCount }}</div>
+      <div class="col-5 data-title">Max Speed</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].maxSpeed }}</div>
+      <div class="col-5 data-title">Trip Type</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].tripType }}</div>
+
+      <div class="col-5 data-title">Flow Out</div>
+      <div class="col-1 data-title">:</div>
+      <div class="col-6 data-info">{{ TripData[0].cam_UltraCount.ultraCountOut }}</div>
+    </div>
+  </div> 
+
+  <div class="row mt-5">
+    <div class="col-6">
+      <div>
+        <app-pass-map></app-pass-map>
+      </div>
+    </div>
+    <div class="col-6">
+      
+<!-- <div id="myModal" class="myModal">
+  <div class="modalBox">
+      <i (click)="closeModal()" id="closeModal" class="fas fa-times"></i>
+
+
+
+    
+  </div>
+</div> -->
+
+
+<div class="row">
+         
+  <apx-chart
+  [series]="series"
+  [chart]="chart"
+  [dataLabels]="dataLabels"
+  [markers]="markers"
+  [title]="title"
+  [fill]="fill"
+  [yaxis]="yaxis"
+  [xaxis]="xaxis"
+  [tooltip]="tooltip"
+  [autoUpdateSeries]="true"
+></apx-chart>
+</div>
+
+    </div>
+  </div>
+
+  <div class="passenger-grid">
+    <ejs-grid
+      [dataSource]="TripData[0].passengers"
+      locale="en-US"
+      allowPaging="true"
+      height="100%"
+      [pageSettings]="initialPage"
+    > 
+    
+      <e-columns>
+        <e-column field="name" headerText="Passenger Name"></e-column>
+        <e-column field="universalID" headerText="Universal ID"></e-column>
+        <e-column field="latitude" headerText="Latitude"></e-column>
+        <e-column field="longitude" headerText="Longitude"></e-column>
+        <e-column field="timeStamp" headerText="Time Stamp"></e-column>
+      </e-columns>
+    </ejs-grid> 
+    <div class="text-center" style="z-index: 2;" >
+      <button class="e-btn e-success" (click)="back()">back to all trips</button>
+    </div>
+  </div> 
+ 
+ 
+  <!-- <div class="row">
+    <div class="col-6">
+   
+    </div>
+    <div class="col-6">
+    
+    </div>
+  </div> -->
+ 
+ 
+  
+</div>

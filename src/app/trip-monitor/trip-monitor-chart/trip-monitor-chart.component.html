@@ -1,0 +1,8 @@
+
+        <div class="" style="height: 100%; width: 100%;" *ngIf="chartflag == true">
+        <ejs-chart #chartcolumn style='height: inherit !important;' [chartArea]='chartArea' width='95%' align='center' id='chartcontainer' [primaryXAxis]='primaryXAxis'
+            [primaryYAxis]='primaryYAxis' [title]='title' [tooltip]='tooltip' (load)='load($event)'>
+            <e-series-collection>
+                <e-series [dataSource]='data' type='Column' fill='#33383e' xName='x' yName='y'  width='2' [cornerRadius]='radius' columnWidth="0.2"> </e-series>
+            </e-series-collection>
+        </ejs-chart></div>

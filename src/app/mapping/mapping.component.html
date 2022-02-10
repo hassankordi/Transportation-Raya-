@@ -1,0 +1,24 @@
+<div class="mapping">
+  <ejs-tab id="element">
+    <e-tabitems>
+      <e-tabitem>
+        <ng-template #headerText>
+          <div>Active Trips</div>
+        </ng-template>
+        <ng-template #content>
+          <hr  style="margin: 0px" />
+          <app-mapping-active-trips></app-mapping-active-trips>
+        </ng-template>
+      </e-tabitem>
+      <e-tabitem>
+        <ng-template #headerText>
+          <div>Historic Trips</div>
+        </ng-template>
+        <ng-template #content>
+          <hr style="margin: 0px" />
+          <app-mapping-historic-trips></app-mapping-historic-trips>
+        </ng-template>
+      </e-tabitem>
+    </e-tabitems>
+  </ejs-tab>
+</div>

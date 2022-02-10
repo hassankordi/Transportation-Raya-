@@ -1,0 +1,114 @@
+
+
+    <div class="trip-analysis">
+        <div class="col-lg-12 control-section card-control-section reveal_card_layout" style="width: 25%;">
+    <div class="e-sample-resize-container e-card-resize-container">
+        <div class='row'>
+            <div class="row card-layout">
+                    <div class="e-card" style="text-align:center;">
+                        <div id="card_revealed">
+                            <div class="e-card-content" style="line-height:2.75em">
+                                <table style="width: 100%;table-layout: fixed;">
+                                    <tr>
+                                        <div style="text-align: center;font-weight: 500;width: 200%;font-size: 1.1rem;"> Trip Details </div>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;"> Trip ID </div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;width: 80px;white-space:nowrap">Steve Fenton</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;">Route</div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;white-space:nowrap">Jul 7, 2014</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;">Bus</div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;">82</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;"> Driver </div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;width: 80px;white-space:nowrap">Steve Fenton</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;">Start Time</div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;white-space:nowrap">Jul 7, 2014</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;">End Time</div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;">82</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;"> Max Speed </div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;width: 80px;white-space:nowrap">Steve Fenton</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;">Total TicKet Count</div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;white-space:nowrap">Jul 7, 2014</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;">Total Passenger Count</div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;">82</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="text-align: left;font-weight: 500;">Trip Direction </div>
+                                        </td>
+                                        <td>
+                                            <div style="text-align: left;">82</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="trip-analysis-grid">
+           <ejs-grid [dataSource]='data' locale='en-US' allowPaging='true' height=100% [pageSettings]='initialPage'>
+        <e-columns>
+            <e-column field='OrderID' headerText='Order ID' width='120' textAlign='Right'></e-column>
+            <e-column field='CustomerName' headerText='Customer Name' width='150'></e-column>
+            <e-column field='OrderDate' headerText='Order Date' width='130' format="yMd" textAlign='Right'></e-column>
+            <e-column field='Freight' headerText='Freight' width='120' format='C2' textAlign='Right'></e-column>
+            <e-column field='ShipCountry' headerText='Ship Country' width='170'></e-column>
+        </e-columns>
+    </ejs-grid>
+    </div>
+    </div>

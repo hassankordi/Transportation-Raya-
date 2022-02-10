@@ -1,0 +1,44 @@
+<div class="control-section">
+    <!-- sample level element  -->
+    <div class="col-lg-12 col-sm-12 col-md-12 center">
+        Click/Touch the button to view the sample
+    </div>
+    <div class="col-lg-12 col-sm-12 col-md-12 center">
+        <a class="e-btn" id="newTab" (click)="newTabClick()" target="_blank">Open in new Tab</a>
+    </div>
+    <!-- sample level element  -->
+    <div id="wrapper">
+        <div class="col-lg-12 col-sm-12 col-md-12" id="sidebar-section">
+            <div class="col-lg-12 col-sm-12 col-md-12">
+                <!--header-section  declaration -->
+                <div class="header-section dock-menu" id="header">
+                    <ul class="header-list">
+                        <li id="hamburger" class="icon-menu icon list" (click)="openClick()"></li>
+                    </ul>
+                </div>
+                <!--end of header-section  declaration -->
+                <!-- sidebar element declaration -->
+                <ejs-sidebar id="sidebar-menu" class="dock-menu" #sidebarMenuInstance [enableDock]='enableDock' [width]='width'
+                    [dockSize]='dockSize' [mediaQuery]='mediaQuery' [target]='target'>
+                    <div class="main-menu">
+                        <!-- Menu element declaration -->
+                        <ejs-menu [items]='menuItems' orientation='Vertical' cssClass='dock-menu'></ejs-menu>
+                        <div class="bottom-menu mb-5">
+                        <ejs-menu [items]='menuItems2' orientation='Vertical' cssClass='dock-menu'></ejs-menu>
+
+                    </div>
+                    </div>
+                </ejs-sidebar>
+                <!-- end of sidebar element -->
+
+                <!-- main-content declaration -->
+                <div class="main-content" id="maintext">
+                    <div class="sidebar-menu-content">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+                <!-- end of main-content -->
+            </div>
+        </div>
+    </div>
+</div>

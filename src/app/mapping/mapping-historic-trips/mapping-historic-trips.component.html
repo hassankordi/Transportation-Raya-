@@ -1,0 +1,137 @@
+<div class="map-active">
+    <div class="col-lg-12 control-section card-control-section reveal_card_layout mt-2 text-center" style="width: 25%;">
+        <div class="row mb-2" >
+            <div class="col-3 mt-2 text-center" style="font-weight: 600; font-size: 15px;">
+                Driver
+            </div>
+            <div class="col-9 ">
+                     <mat-form-field >
+                            <mat-select [disabled]="checked" >
+                              <mat-option *ngFor="let driver of drivers" [value]="driver.cardUniID" (click)="onDriverChange(driver.cardUniID)" >
+                                {{driver.name}}
+                              </mat-option>
+                            </mat-select>
+                    </mat-form-field> 
+            </div>
+        </div>
+        <div class="row mb-2" >
+            <div class="col-3 mt-2 text-center" style="font-weight: 600; font-size: 15px;">
+                Route
+            </div>
+            <div class="col-9 ">
+                     <mat-form-field >
+                            <mat-select  [disabled]="checked" >
+                              <mat-option *ngFor="let route of routes" [value]="route.id"  (click)="onRouteChange(route.id)">
+                                {{route.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field> 
+            </div>
+        </div>
+        <div class="row mb-2" >
+            <div class="col-3 mt-2 text-center" style="font-weight: 600; font-size: 15px;">
+                Bus
+            </div>
+            <div class="col-9 " >
+                    <mat-form-field >
+                            <mat-select  [disabled]="checked" [disabled]="disabledFlag">
+                              
+                              <mat-option *ngFor="let bus of buses" [value]="bus.terminalID" (click)="onBusChange(bus.terminalID)">
+                                {{bus.palletNumber}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+            </div>
+        </div>
+        <div class="row mb-2" >
+            <div class="col-3 mt-2 text-center" style="font-weight: 600; font-size: 15px;">
+                Date
+            </div>
+            <div class="col-9 ">
+                     <mat-form-field >
+                            <mat-select [disabled]="checked" [disabled]="disabledFlag">
+                              <mat-option *ngFor="let date of tripDate" [value]="date.tripID" (click)="onDateChange(date.tripID)">
+                                {{date.date | date: "medium" }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field> 
+            </div>
+        </div>
+        <button *ngIf="checked" (click)="reload()" class="btn btn-info my-3 text-light"> Choose Another Date</button>
+    <div class="e-sample-resize-container e-card-resize-container">
+        <div class='row'>
+            <div class="row card-layout">
+                    <div class="e-card" style="text-align:center;">
+                        <div id="card_revealed">
+                            <div class="e-card-content" style="line-height:2.75em">
+                                <table style="width: 100%;table-layout: fixed;">
+                                    <tr>
+                                        <div style="text-align: center;font-weight: 500;width: 200%;font-size: 1.1rem;"> Trip Details </div>
+                                    </tr>
+                                    <tr>
+                                            <td>
+                                                    <div style="text-align: left;font-weight: 500;"> Trip ID </div>
+                                                </td>
+                                                <td>
+                                                    <div style="text-align: left;width: 80px;white-space:nowrap">{{tripData.tripID}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="text-align: left;font-weight: 500;">Route</div>
+                                                </td>
+                                                <td>
+                                                    <div style="text-align: left;white-space:nowrap">{{tripData.rout}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="text-align: left;font-weight: 500;">Bus</div>
+                                                </td>
+                                                <td>
+                                                    <div style="text-align: left;">{{tripData.bus}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="text-align: left;font-weight: 500;"> Driver </div>
+                                                </td>
+                                                <td>
+                                                    <div style="text-align: left;width: 80px;white-space:nowrap">{{tripData.driver}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="text-align: left;font-weight: 500;"  > Max Speed </div>
+                                                </td>
+                                                <td>
+                                                    <div style="text-align: left;width: 80px;white-space:nowrap">{{tripData.maxSpeed}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div style="text-align: left;font-weight: 500;">Passengers</div>
+                                                </td>
+                                                <td>
+                                                    <div style="text-align: left;">{{tripData.passengerCount}}</div>
+                                                </td>
+                                            
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="map-to-active border">
+     <!-- <app-historical-map></app-historical-map>  -->
+         <app-historical-map [MyId]='fatouh'></app-historical-map>  
+ 
+      <!-- <app-map></app-map> -->
+    </div>
+</div> 
+
+

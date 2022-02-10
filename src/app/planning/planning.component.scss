@@ -1,0 +1,90 @@
+*{
+    padding: 0;
+}
+.e-grid .e-gridheader {
+    padding-right: 0px !important;
+}
+.e-grid .e-gridheader .e-stackedheadercelldiv{
+    font-weight: 700 !important;
+    font-size: 16px;
+    text-align: center !important;
+}
+.planning{
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow-y: scroll;
+    .planning-title{
+        line-height: 45px;
+        // padding: 0px 20px;
+        font-size: 1rem;
+        // font-weight: 600;
+        border-bottom: 1px solid lightgray;
+        button{
+            position: relative;
+            left: calc(100% - 230px);
+        }
+        svg{
+            margin: 0px 10px;
+        }
+    }
+    .planning-list{
+        height: 55%;
+        width: 100%;
+        display: flex;
+        padding: 10px;
+        // border-bottom: 1px solid lightgray;
+        .planning-list-items{
+            height: 100%;
+            width: 24%;
+            p{
+                position: relative;
+	            left: -50%;
+	            float: right;
+                margin-bottom: 0.2rem;
+            }
+            .week-day{
+                margin-top: 35%;
+                margin-left: 20%;
+                cursor: pointer;
+                border-radius: 50%;
+                background-color: #c9c9c9;
+                // background-color: #33383e;
+                padding: 10px 10px 10px 12px;
+                // color: #FFF;
+                &:hover{
+                    background-color: #9b9b9b;
+                }
+            }
+            .week-day-active{
+                background-color: #33383e;
+                color: #fff;
+            }
+            .e-calendar, .e-bigger.e-small .e-calendar {
+                max-width: 100% !important;
+            }
+        }
+        .plus{
+            width: 3%;
+            text-align: center;
+            i{
+                position: relative;
+                top: 50%;
+            }
+        }
+    }
+    .planning-grids{
+        height: calc(45% - 50px);
+        display: flex;
+        width: 100%;
+        .planning-container-grid{
+            margin-top: 50px;
+            padding: 10px;
+            width: 50%;
+            // background-color: gray !important;
+            // padding: 0 !important;
+        }
+    }
+}

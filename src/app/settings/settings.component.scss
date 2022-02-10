@@ -1,0 +1,21 @@
+.planning{
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow-y: scroll;
+    .planning-title{
+        line-height: 45px;
+        // padding: 0px 20px;
+        font-size: 1rem;
+        // font-weight: 600;
+        border-bottom: 1px solid lightgray;
+        button{
+            position: relative;
+            left: calc(100% - 230px);
+        }
+        svg{
+            margin: 0px 10px;
+        }
+    }}

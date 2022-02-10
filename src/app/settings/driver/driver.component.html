@@ -1,0 +1,82 @@
+<!-- <div class="container p-5">
+
+    <form [formGroup]="driverData" (ngSubmit)="sendData()" action="">
+       
+        <label for="name">Name </label>
+        <input id="name" formControlName="name" class="form-control" type="text">
+
+        <label for="long">Card ID </label>
+        <input id="long" formControlName="cardUniID" class="form-control" type="text">
+
+   
+        <button type="submit" class="btn btn-success my-3"> Add</button>
+    </form>
+</div> -->
+
+
+
+<div class="col-lg-12 control-section p-5">
+    <div class="content-wrapper" style="margin-bottom: 25px;">
+        <div class="formtitle">
+            <span>Add Driver</span>
+        </div>
+
+        <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+
+            <div class="form-group">
+                <div class="e-float-input">
+                   
+                    <input  id="name" formControlName="name" >
+                    <span class="e-float-line"></span>
+                    <label for="name" class="e-float-text">Driver Name</label>
+                    <div *ngIf="name.errors ">
+                        <div *ngIf="name.errors.required && name.touched" class="e-error">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="form-group">
+                <div class="e-float-input">
+                    <input id="cardUniID" formControlName="cardUniID" >
+                    <span class="e-float-line"></span>
+                    <label for="cardUniID" class="e-float-text">cardUniID</label>
+                    <div *ngIf="cardUniID.errors ">
+                        <div *ngIf="cardUniID.errors.required && cardUniID.touched" class="e-error">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+                    <div class="row d-flex justify-content-around">
+                        <!-- (click)="add()" -->
+                        <button [disabled]="!reactForm.valid" (click)="sendData()" id="validateSubmit" class="samplebtn e-control e-btn e-primary" type="submit" style="height:40px;width: 150px;" data-ripple="true">Add Driver</button>
+                        <button id="resetbtn" class="samplebtn e-control e-btn" type="reset" style="height:40px;width: 150px;" data-ripple="true">Clear</button>
+                    </div>
+                 
+        </form>
+    </div>
+</div>
+
+<div class="control-section">
+    <ejs-grid [dataSource]='data'
+     allowPaging='true'
+      [pageSettings]='pageSettings'
+       [editSettings]='editSettings'
+       (commandClick)='clickHandler($event)'
+       >
+        <e-columns>
+            <e-column field='id' headerText='Id' width='120' textAlign='Right' isPrimaryKey='true' [validationRules]=''></e-column>
+            <e-column field='name' headerText='Name' width='120' textAlign='Right' [validationRules]='nameRole'></e-column>
+            <!-- <e-column field='status' headerText='Status' width='120' textAlign='Right' [validationRules]='nameRole'></e-column> -->
+            <e-column field='cardUniID' headerText='Card Uni ID' width='120' textAlign='Right' [validationRules]='nameRole'></e-column>
+            <!-- <e-column field='longitude' headerText='Longitude' width='120' format='C2' textAlign='Right' editType='numericedit' [validationRules]=''></e-column>
+            <e-column field='latitude' headerText='Latitude' width='120' format='C2' textAlign='Right' editType='numericedit' [validationRules]=''></e-column> -->
+            <!-- <e-column field='latitude' headerText='Latitude' width='130' type='date' format='yMd' editType='datepickeredit' textAlign='Right'></e-column> -->
+            <!-- <e-column field='ShipCountry' headerText='Ship Country' width='150' editType='dropdownedit' [edit]='editparams'></e-column> -->
+            <e-column headerText='Manage Records' width='160' [commands]='commands'></e-column>
+        </e-columns>
+    </ejs-grid>
+</div>

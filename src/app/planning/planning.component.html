@@ -1,0 +1,225 @@
+<div class="planning shadow">
+  <div class="planning-title">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+    >
+      <defs>
+        <style>
+          .a2,
+          .b2 {
+            fill: none;
+          }
+
+          .b2 {
+            stroke: #2c3e50;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1.5px;
+          }
+        </style>
+      </defs>
+      <path class="a2" d="M0,0H24V24H0Z" />
+      <circle class="b2" cx="2" cy="2" r="2" transform="translate(12 4)" />
+      <line class="b2" x2="8" transform="translate(4 6)" />
+      <line class="b2" x2="4" transform="translate(16 6)" />
+      <circle class="b2" cx="2" cy="2" r="2" transform="translate(6 10)" />
+      <line class="b2" x2="2" transform="translate(4 12)" />
+      <line class="b2" x2="10" transform="translate(10 12)" />
+      <circle class="b2" cx="2" cy="2" r="2" transform="translate(15 16)" />
+      <line class="b2" x2="11" transform="translate(4 18)" />
+      <line class="b2" x2="1" transform="translate(19 18)" />
+    </svg>
+    planning
+    <button
+      (click)="btnclick()"
+      class="e-btn e-success"
+      [disabled]="
+        routeSelected == '' || carSelected == '' || driverSelected == ''
+      "
+    >
+      save ride
+    </button>
+  </div>
+  <div class="planning-list">
+    <div class="planning-list-items">
+      <!-- <button (click)="btnclick()" class="e-btn">ADD ITEMS</button> -->
+      <p>Routes</p>
+      <ejs-listbox
+        #listroute
+        id="listbox"
+        [dataSource]="route"
+        [fields]="setfieldroute"
+        height="280px"
+        (change)="change($event, 'route')"
+      ></ejs-listbox>
+    </div>
+    <div class="plus">
+      <i class="fa fa-plus"></i>
+    </div>
+    <div class="planning-list-items">
+      <!-- <button (click)="btnclick()" class="e-btn">ADD ITEMS</button> -->
+      <p>Cars</p>
+      <ejs-listbox
+        #listcar
+        id="listbox1"
+        [dataSource]="car"
+        [fields]="setfieldcar"
+        height="280px"
+        (change)="change($event, 'car')"
+      ></ejs-listbox>
+    </div>
+    <div class="plus">
+      <i class="fa fa-plus"></i>
+    </div>
+    <div class="planning-list-items">
+      <!-- <button (click)="btnclick()" class="e-btn">ADD ITEMS</button> -->
+      <p>Drivers</p>
+      <ejs-listbox
+        #listdriver
+        id="listbox2"
+        [dataSource]="driver"
+        [fields]="setfielddriver"
+        height="280px"
+        (change)="change($event, 'driver')"
+      ></ejs-listbox>
+    </div>
+    <div class="plus">
+      <i class="fa fa-plus"></i>
+    </div>
+    <div class="planning-list-items">
+      <div style="margin-left: 30%">Repeation</div>
+      <div class="row">
+        <div class="col-4">
+          <ejs-radiobutton
+            [(ngModel)]="value"
+            label="Daily"
+            name="payment"
+            value="Daily"
+            checked="true"
+          ></ejs-radiobutton>
+        </div>
+        <div class="col-4">
+          <ejs-radiobutton
+            [(ngModel)]="value"
+            label="Weekly"
+            name="payment"
+            value="Weekly"
+          ></ejs-radiobutton>
+        </div>
+        <div class="col-4">
+          <ejs-radiobutton
+            [(ngModel)]="value"
+            label="Monthly"
+            name="payment"
+            value="Monthly"
+          ></ejs-radiobutton>
+        </div>
+      </div>
+      <div
+        class="row border my-2"
+        style="height: calc(100% - 56px)"
+        *ngIf="value == 'Weekly'"
+      >
+        <div class="col-4">
+          <div
+            class="week-day"
+            (click)="addDay('SAT')"
+            [ngClass]="weekDay.includes('SAT') ? 'week-day-active' : ''"
+          >
+            SAT
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            class="week-day"
+            (click)="addDay('SUN')"
+            [ngClass]="weekDay.includes('SUN') ? 'week-day-active' : ''"
+          >
+            SUN
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            class="week-day"
+            (click)="addDay('MON')"
+            [ngClass]="weekDay.includes('MON') ? 'week-day-active' : ''"
+          >
+            MON
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            class="week-day"
+            (click)="addDay('TUE')"
+            [ngClass]="weekDay.includes('TUE') ? 'week-day-active' : ''"
+          >
+            TUE
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            class="week-day"
+            (click)="addDay('WED')"
+            [ngClass]="weekDay.includes('WED') ? 'week-day-active' : ''"
+          >
+            WED
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            class="week-day"
+            (click)="addDay('THR')"
+            [ngClass]="weekDay.includes('THR') ? 'week-day-active' : ''"
+          >
+            THR
+          </div>
+        </div>
+        <div class="col-4">
+          <div
+            class="week-day"
+            (click)="addDay('FRI')"
+            [ngClass]="weekDay.includes('FRI') ? 'week-day-active' : ''"
+          >
+            FRI
+          </div>
+        </div>
+      </div>
+      <ejs-calendar
+        #calendar
+        width="100%"
+        [isMultiSelection]="multiSelection"
+        [values]="dates"
+        (change)="onValueChange()"
+        (created)="onValueChange()"
+        *ngIf="value == 'Monthly'"
+      ></ejs-calendar>
+    </div>
+  </div>
+  <div class="planning-grids">
+    <div class="planning-container-grid">
+      <ejs-grid #activegrid [dataSource]="plannedTrips" height="120">
+        <e-columns>
+          <e-column align="center"
+            headerText="Planned Rides"
+            [columns]="shipColumns"
+           
+          ></e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+    <div class="planning-container-grid">
+      <ejs-grid [dataSource]="completedTrips" height="120">
+        <e-columns>
+          <e-column
+            align="center"
+            headerText="Completed Rides"
+            [columns]="shipColumns"
+          ></e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+  </div>
+</div>

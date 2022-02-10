@@ -1,0 +1,26 @@
+.trip-monitor {
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  // background-color: gray;
+  overflow-y: scroll;
+  .trip-monitor-title {
+    line-height: 45px;
+    font-size: 1rem;
+    border-bottom: 1px solid lightgray;
+    svg {
+      margin: 0px 10px;
+    }
+  }
+  .trip-monitor-body {
+    height: calc(100% - 45px);
+    // border-bottom: 1px solid lightgray;
+    padding-top: 10px;
+  }
+}
+
+.e-arrow-right:before {
+  content: "\e85f";
+}

@@ -1,0 +1,130 @@
+<div class="trip-monitor shadow">
+    <div class="trip-monitor-title">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <defs>
+          <style>
+            .a2,
+            .b2 {
+              fill: none;
+            }
+  
+            .b2 {
+              stroke: #2c3e50;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              stroke-width: 1.5px;
+            }
+          </style>
+        </defs>
+        <path class="a2" d="M0,0H24V24H0Z" />
+        <circle class="b2" cx="2" cy="2" r="2" transform="translate(12 4)" />
+        <line class="b2" x2="8" transform="translate(4 6)" />
+        <line class="b2" x2="4" transform="translate(16 6)" />
+        <circle class="b2" cx="2" cy="2" r="2" transform="translate(6 10)" />
+        <line class="b2" x2="2" transform="translate(4 12)" />
+        <line class="b2" x2="10" transform="translate(10 12)" />
+        <circle class="b2" cx="2" cy="2" r="2" transform="translate(15 16)" />
+        <line class="b2" x2="11" transform="translate(4 18)" />
+        <line class="b2" x2="1" transform="translate(19 18)" />
+      </svg>
+      Credits
+    </div>
+    <div class="trip-monitor-body">
+        
+      <!-- <ejs-tab id="tab_default" heightAdjustMode="Auto">
+        <e-tabitems>
+          <e-tabitem [header]="headerText[0]">
+            <ng-template #content>
+              <hr />
+    
+            </ng-template>
+          </e-tabitem>
+        
+        </e-tabitems>
+      </ejs-tab> -->
+  
+      <!-- [filterSettings]="filterSettings" -->
+
+      <ejs-grid
+      #overviewgrid
+      id="overviewgrid"
+      [dataSource]="data"
+      rowHeight="38"
+      [allowSelection]="true"
+      [allowSorting]="true"
+      [enableHeaderFocus]="true"
+      [allowSorting]="true"
+      [allowFiltering]="true"
+      height="100%"
+      (rowSelected)="onRowSelected($event)"
+      allowPaging="true"
+      [pageSettings]="initialPage"
+      style="height: 100vh;"
+    
+    >
+      <e-columns>
+       
+        <e-column
+          field="passanger"
+          headerText="Name"
+          [isPrimaryKey]="true"
+          textAlign='Center'
+        ></e-column>
+        <e-column textAlign='Center' field="blance" headerText="Points"></e-column>
+        <e-column textAlign='Center' field="timeStamp" headerText="Time"></e-column>
+        <!-- <e-column field="rout" headerText="Route"></e-column> -->
+        <!-- <e-column
+          field="passengerCount"
+          headerText="Passenger Count"
+          [filter]="filter"
+          clipMode="EllipsisWithTooltip"
+        >
+        </e-column> -->
+        <!-- <e-column
+          field="driver"
+          headerText="Driver"
+          [filter]="filter"
+          clipMode="EllipsisWithTooltip"
+        ></e-column>
+        <e-column
+          field="maxSpeed"
+          headerText="Max Speed"
+          [filter]="filterSettings"
+        ></e-column> -->
+    
+        <!-- <e-column field="Status" [filter]="filter" headerText="Status" width="150">
+          <ng-template #template let-data>
+            <div
+              *ngIf="data.status != 'Ended'; else login"
+              class="statustemp e-activecolor"
+            >
+              <span class="statustxt e-activecolor">{{ data.status }}</span>
+            </div>
+            <ng-template #login>
+              <div class="statustemp e-inactivecolor">
+                <span class="statustxt e-inactivecolor">{{ data.status }}</span>
+              </div>
+            </ng-template>
+          </ng-template>
+        </e-column> -->
+      </e-columns>
+    </ejs-grid> 
+
+
+    <!--     
+    <ejs-grid [dataSource]='data' [toolbar]='toolbarOptions' height='272px'>
+        <e-columns>
+            <e-column field='OrderID' headerText='Order ID' textAlign='Right' width=120></e-column>
+            <e-column field='CustomerID' headerText='Customer ID' width=150></e-column>
+            <e-column field='Freight' headerText='Freight' textAlign='Right' format='C' width=120></e-column>
+            <e-column field='OrderDate' headerText='Order Date' textAlign='Right' format='yMd' width=140></e-column>
+        </e-columns>
+        </ejs-grid> -->
+    </div>
+  </div>
+  

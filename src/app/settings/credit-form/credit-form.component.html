@@ -1,0 +1,46 @@
+<div class="col-lg-12 control-section p-5">
+    <div class="content-wrapper" style="margin-bottom: 25px;">
+        <div class="formtitle">
+            <span>Add Points</span>
+        </div>
+
+        <form id="formId" [formGroup]="reactForm" #formDir="ngForm" class="form-horizontal" novalidate="">
+
+           
+            <div class="form-group">
+                <div class="e-float-input">
+                  
+                    <ejs-dropdownlist formControlName="name" id='ddlelement' #samples [dataSource]='data' [fields]='fields' 
+                    [placeholder]='text'></ejs-dropdownlist>
+                    <span class="e-float-line"></span>
+               
+                    <div *ngIf="name.errors">
+                        <div *ngIf="name.errors.required && name.touched" class="e-error">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="e-float-input">
+                    <input id="points" formControlName="points" type="number">
+                    <span class="e-float-line"></span>
+                    <label for="points" class="e-float-text">Points</label>
+                    <div *ngIf="points.errors ">
+                        <div *ngIf="points.errors.required && points.touched" class="e-error">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <div class="row d-flex justify-content-around">
+                        <button [disabled]="!reactForm.valid" (click)="add()" id="validateSubmit" class="samplebtn e-control e-btn e-primary" type="submit" style="height:40px;width: 150px;" data-ripple="true">Add Points</button>
+                        <button id="resetbtn" class="samplebtn e-control e-btn" type="reset" style="height:40px;width: 150px;" data-ripple="true">Clear</button>
+                    </div>
+                 
+        </form>
+    </div>
+</div>
+
+
