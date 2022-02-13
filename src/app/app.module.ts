@@ -90,6 +90,9 @@ import { CreditComponent } from './credit/credit.component';
 import { CreditFormComponent } from './settings/credit-form/credit-form.component';
 
 
+
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -164,7 +167,11 @@ import { CreditFormComponent } from './settings/credit-form/credit-form.componen
     MatSelectModule,
     MatButtonModule, 
     LeafletModule ,
-    NgApexchartsModule
+    NgApexchartsModule ,
+
+     BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [PageService, SortService, FilterService, GroupService ,SearchService, ToolbarService,
     DatePipe

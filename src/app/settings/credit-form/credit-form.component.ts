@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 import { ApiServiceService } from 'src/app/services/api-service.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-credit-form',
@@ -22,7 +23,7 @@ export class CreditFormComponent implements OnInit {
   //set the placeholder to DropDownList input
   public text: string = "User Name";
 
-  constructor(private API: ApiServiceService) {
+  constructor(private API: ApiServiceService, private notifyService: NotificationService) {
     this.reactForm = new FormGroup({
 
       'name': new FormControl('', [FormValidators.required]),
@@ -39,6 +40,14 @@ export class CreditFormComponent implements OnInit {
     })
 
   }
+  showToasterSuccess() {
+    this.notifyService.showSuccess("Success !!", "Transportation.com")
+  }
+
+  showToasterError() {
+    this.notifyService.showError("Faild ", "Transportation.com")
+  }
+
   add() {
     console.log(this.reactForm.value);
     const obj = {
@@ -47,12 +56,17 @@ export class CreditFormComponent implements OnInit {
       "passangerCardUniID": this.reactForm.value.name,
       "addedBlance": this.reactForm.value.points
     }
-    this.API.addPoints(obj).subscribe((res)=>{console.log(res);
-    } , (err)=>{console.log(err);
+    this.API.addPoints(obj).subscribe((res) => {
+      console.log(res);
+      this.showToasterSuccess();
+      this.reactForm.reset();
+    }, (err) => {
+      this.showToasterError()
+      console.log(err);
     })
 
   }
-  
+
   ngOnInit(): void {
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
@@ -60,7 +74,7 @@ export class CreditFormComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          alert('Customer details added!');
+          
           this.reactForm.reset();
         } else {
           // validating whole form
@@ -74,7 +88,7 @@ export class CreditFormComponent implements OnInit {
 
   get name() { return this.reactForm.get('name'); }
   get points() { return this.reactForm.get('points'); }
-  
+
 
 
 }

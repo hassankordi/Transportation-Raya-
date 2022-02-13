@@ -57,7 +57,8 @@
                           </mat-form-field> 
             </div>
         </div>
-        <button *ngIf="checked" (click)="reload()" class="btn btn-info my-3 text-light"> Choose Another Date</button>
+        <!-- innerText is a property in angular and it takes a string  -->
+        <button *ngIf="checked" (click)="reload()" class="btn btn-info my-3 text-light" [innerText]="reloadTextBtn"></button>
     <div class="e-sample-resize-container e-card-resize-container">
         <div class='row'>
             <div class="row card-layout">

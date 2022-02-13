@@ -6,6 +6,7 @@ import { ClickEventArgs } from '@syncfusion/ej2-buttons';
 import { EnumDriver } from 'src/app/enum-driver';
 import { command, rowEdit } from 'src/app/grid-commands';
 import { ApiServiceService } from 'src/app/services/api-service.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-vehicle',
@@ -15,7 +16,7 @@ import { ApiServiceService } from 'src/app/services/api-service.service';
 export class VehicleComponent implements OnInit {
   reactForm: FormGroup;
 
-  constructor(private service: ApiServiceService) {
+  constructor(private service: ApiServiceService, private notifyService: NotificationService) {
 
     this.service.getBuses().subscribe((res: any) => {
       res.forEach((elem: any) => {
@@ -55,6 +56,14 @@ export class VehicleComponent implements OnInit {
     });
 
   }
+  showToasterSuccess() {
+    this.notifyService.showSuccess("Success !!", "Transportation.com")
+  }
+
+  showToasterError() {
+    this.notifyService.showError("Faild ", "Transportation.com")
+  }
+
 
 
   vehicleData = new FormGroup({
@@ -92,6 +101,8 @@ export class VehicleComponent implements OnInit {
 
     };
     this.service.addVehicle(obj).subscribe((res) => {
+      this.showToasterSuccess();
+      this.reactForm.reset();
       console.log(res);
       
     this.service.getBuses().subscribe((res: any) => {
@@ -122,6 +133,7 @@ export class VehicleComponent implements OnInit {
     })
 
     }, (err) => {
+      this.showToasterError()
       console.log(err);
     })
 
@@ -167,7 +179,6 @@ export class VehicleComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          alert('Passenger details added!');
           this.reactForm.reset();
         } else {
           // validating whole form
@@ -214,8 +225,11 @@ export class VehicleComponent implements OnInit {
 
         this.service.putVehicle(obj).subscribe((res) => {
           console.log(res);
+          this.showToasterSuccess();
+          this.reactForm.reset()
 
         }, (err) => {
+          this.showToasterError()
           console.log(err);
 
         })
@@ -271,9 +285,11 @@ export class VehicleComponent implements OnInit {
         };
 
         this.service.DeleteVehicle(obj).subscribe((res) => {
+          this.showToasterSuccess()
           console.log(res);
 
         }, (err) => {
+          this.showToasterError()
           console.log(err);
 
         })

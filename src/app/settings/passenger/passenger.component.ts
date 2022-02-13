@@ -9,6 +9,7 @@ import { Passenger } from './passenger.model';
 
 
 import { FormValidators } from '@syncfusion/ej2-angular-inputs';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-passenger',
@@ -18,23 +19,24 @@ import { FormValidators } from '@syncfusion/ej2-angular-inputs';
 export class PassengerComponent implements OnInit {
   reactForm: FormGroup;
 
-  constructor(private service:ApiServiceService) { 
+  constructor(private service: ApiServiceService, private notifyService: NotificationService) {
 
-    this.service.getPassenger().subscribe((res)=>{
-     
+    this.service.getPassenger().subscribe((res) => {
+
 
       for (let i = 0; i < res.length; i++) {
-      if(res[i].status ==1){
-        res[i].status = "Active"
+        if (res[i].status == 1) {
+          res[i].status = "Active"
 
-      }else{
-        res[i].status = "Not Active"
+        } else {
+          res[i].status = "Not Active"
 
-      }
+        }
       }
       this.data = res;
       console.log(res);
-    },(err)=>{console.log(err);
+    }, (err) => {
+      console.log(err);
     })
 
     this.reactForm = new FormGroup({
@@ -44,12 +46,20 @@ export class PassengerComponent implements OnInit {
       'longitude': new FormControl('', [FormValidators.required]),
       'latitude': new FormControl('', [FormValidators.required]),
       'speed': new FormControl('', [FormValidators.required]),
-      
+
     });
 
   }
 
-  
+  showToasterSuccess() {
+    this.notifyService.showSuccess("Success !!", "Transportation.com")
+  }
+
+  showToasterError() {
+    this.notifyService.showError("Faild ", "Transportation.com")
+  }
+
+
   // passengerData = new FormGroup({
   //   name: new FormControl(''),
   //   cardUniID: new FormControl(''),
@@ -60,30 +70,44 @@ export class PassengerComponent implements OnInit {
 
   sendData() {
     console.log(this.reactForm.value);
-    let name:string = this.reactForm.value.name;
-    let cardUniID:string = this.reactForm.value.cardUniID;
-    let longitude:string = this.reactForm.value.longitude;
-    let latitude:string = this.reactForm.value.latitude;
+    let name: string = this.reactForm.value.name;
+    let cardUniID: string = this.reactForm.value.cardUniID;
+    let longitude: string = this.reactForm.value.longitude;
+    let latitude: string = this.reactForm.value.latitude;
     let speed = Number(this.reactForm.value.speed);
     let val = {
-      name ,
-      cardUniID ,
+      name,
+      cardUniID,
       longitude,
       latitude,
       speed,
 
     }
     console.log(val);
-    
-    this.service.addPassenger(val).subscribe((res)=>{
+
+    this.service.addPassenger(val).subscribe((res) => {
       console.log(res);
+      this.showToasterSuccess();
+      this.reactForm.reset();
       // get data again after add
-      this.service.getPassenger().subscribe((res)=>{
+      this.service.getPassenger().subscribe((res) => {
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].status == 1) {
+            res[i].status = "Active"
+
+          } else {
+            res[i].status = "Not Active"
+
+          }
+        }
         this.data = res;
         console.log(res);
-      },(err)=>{console.log(err);
+      }, (err) => {
+        console.log(err);
       })
-    },(err)=>{console.log(err);
+    }, (err) => {
+      this.showToasterError()
+      console.log(err);
     })
 
   }
@@ -110,10 +134,10 @@ export class PassengerComponent implements OnInit {
     this.editparams = { params: { popupHeight: '300px' } };
     this.pageSettings = { pageCount: 5 };
     this.commands = [
-    { type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
-    { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } },
-    { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
-    { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
+      { type: 'Edit', buttonOption: { iconCss: ' e-icons e-edit', cssClass: 'e-flat' } },
+      { type: 'Delete', buttonOption: { iconCss: 'e-icons e-delete', cssClass: 'e-flat' } },
+      { type: 'Save', buttonOption: { iconCss: 'e-icons e-update', cssClass: 'e-flat' } },
+      { type: 'Cancel', buttonOption: { iconCss: 'e-icons e-cancel-icon', cssClass: 'e-flat' } }];
 
 
 
@@ -124,15 +148,14 @@ export class PassengerComponent implements OnInit {
 
 
 
-      
-  
+
+
     let formId: HTMLElement = <HTMLElement>document.getElementById('formId');
     document.getElementById('formId').addEventListener(
       'submit',
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          alert('Passenger details added!');
           this.reactForm.reset();
         } else {
           // validating whole form
@@ -144,16 +167,16 @@ export class PassengerComponent implements OnInit {
       });
   }
 
-  
+
   get name() { return this.reactForm.get('name'); }
-  get cardUniID() { return this.reactForm.get('cardUniID')}; 
-  get speed() { return this.reactForm.get('speed')}; 
-  get latitude() { return this.reactForm.get('latitude')}; 
-  get longitude() { return this.reactForm.get('longitude')}; 
-  
+  get cardUniID() { return this.reactForm.get('cardUniID') };
+  get speed() { return this.reactForm.get('speed') };
+  get latitude() { return this.reactForm.get('latitude') };
+  get longitude() { return this.reactForm.get('longitude') };
 
 
-  
+
+
 
 
   clickHandler(args: ClickEventArgs): void {
@@ -175,69 +198,66 @@ export class PassengerComponent implements OnInit {
           speed: Number(this.rowParse.speed),
           longitude: this.rowParse.longitude,
           latitude: this.rowParse.latitude,
-        
+
         };
-        let id:string = this.reactForm.value.name;
-        let name:string = this.reactForm.value.name;
-        let cardUniID:string = this.reactForm.value.cardUniID;
-        let longitude:string = this.reactForm.value.longitude;
-        let latitude:string = this.reactForm.value.latitude;
+        let id: string = this.reactForm.value.name;
+        let name: string = this.reactForm.value.name;
+        let cardUniID: string = this.reactForm.value.cardUniID;
+        let longitude: string = this.reactForm.value.longitude;
+        let latitude: string = this.reactForm.value.latitude;
         let speed = Number(this.reactForm.value.speed);
         let val = {
-          name ,
-          cardUniID ,
+          name,
+          cardUniID,
           longitude,
           latitude,
           speed,
-    
-        }
-        // alert(obj.id)
-        // alert(obj.id)
-        // alert(obj.name)
-        // alert(obj.cardUniID)
-        // alert(obj.speed)
-        // alert(obj.longitude)
-        // alert(obj.latitude)
-        // alert(obj.name)
 
-        this.service.putPassenger(obj).subscribe((res)=>{
+        }
+      
+
+        this.service.putPassenger(obj).subscribe((res) => {
+          this.showToasterSuccess();
+          this.reactForm.reset();
           console.log(res);
-          
-        },(err)=>{
+
+        }, (err) => {
+          this.showToasterError()
           console.log(err);
-          
+
         })
-          }, 50);
+      }, 50);
 
-      }
+    }
 
-      if (this.commandParse.type == 'Delete') {
-        console.log("in delete");
-        // alert("in Delete")
-        
-        setTimeout(() => {
-          this.rowParse = args.rowData as rowEdit;
-          console.log(args.rowData);
-          console.log(this.rowParse);
-          let obj = {
-            id: Number(this.rowParse.id),
-            name: this.rowParse.name,
-            cardUniID: this.rowParse.cardUniID,
-            speed: this.rowParse.speed,
-            longitude: this.rowParse.longitude,
-            latitude: this.rowParse.latitude,
-          
-          };
-  
-          this.service.DeletePassenger(obj).subscribe((res)=>{
-            console.log(res);
-            
-          },(err)=>{
-            console.log(err);
-            
-          })
-            }, 50);
-        }
+    if (this.commandParse.type == 'Delete') {
+      console.log("in delete");
+      
+      setTimeout(() => {
+        this.rowParse = args.rowData as rowEdit;
+        console.log(args.rowData);
+        console.log(this.rowParse);
+        let obj = {
+          id: Number(this.rowParse.id),
+          name: this.rowParse.name,
+          cardUniID: this.rowParse.cardUniID,
+          speed: this.rowParse.speed,
+          longitude: this.rowParse.longitude,
+          latitude: this.rowParse.latitude,
+
+        };
+
+        this.service.DeletePassenger(obj).subscribe((res) => {
+          this.showToasterSuccess();
+          console.log(res);
+
+        }, (err) => {
+          this.showToasterError()
+          console.log(err);
+
+        })
+      }, 50);
+    }
     // if (this.commandParse.type == 'Save') {
     //   this.service.putmachine(obj).subscribe((x) => {});
     // }

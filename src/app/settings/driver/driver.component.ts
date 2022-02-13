@@ -6,6 +6,7 @@ import { ClickEventArgs } from '@syncfusion/ej2-buttons';
 import { EnumDriver } from 'src/app/enum-driver';
 import { command, rowEdit } from 'src/app/grid-commands';
 import { ApiServiceService } from 'src/app/services/api-service.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-driver',
@@ -15,7 +16,10 @@ import { ApiServiceService } from 'src/app/services/api-service.service';
 export class DriverComponent implements OnInit {
 
   reactForm: FormGroup;
-  constructor(private service:ApiServiceService) { 
+  test(){
+    alert("3")
+  }
+  constructor(private service:ApiServiceService ,private notifyService: NotificationService) { 
 
     this.service.getDrivers().subscribe((res:any)=>{
 
@@ -58,6 +62,13 @@ export class DriverComponent implements OnInit {
 
   }
 
+  showToasterSuccess() {
+    this.notifyService.showSuccess("Success !!", "Transportation.com")
+  }
+
+  showToasterError() {
+    this.notifyService.showError("Faild ", "Transportation.com")
+  }
   
   driverData = new FormGroup({
    
@@ -71,6 +82,8 @@ export class DriverComponent implements OnInit {
     
     this.service.addDriver(this.reactForm.value).subscribe((res)=>{
       console.log(res);
+      this.showToasterSuccess();
+      this.reactForm.reset();
       this.service.getDrivers().subscribe((res:any)=>{
 
         res.forEach((elem:any) => {
@@ -96,12 +109,14 @@ export class DriverComponent implements OnInit {
  
        this.data = res;
        // this.data[0].status=EnumDriver.active
-       console.log(this.data);
+       console.log( "after add enum active ", this.data);
        console.log(res);
      },(err)=>{console.log(err);
      })
  
-    },(err)=>{console.log(err);
+    },(err)=>{
+      this.showToasterError()
+      console.log(err);
     })
 
 
@@ -149,11 +164,11 @@ export class DriverComponent implements OnInit {
       (e: Event) => {
         e.preventDefault();
         if (this.reactForm.valid) {
-          alert('Driver details added!');
+  
           this.reactForm.reset();
         } else {
           // validating whole form
-          alert("else")
+
           Object.keys(this.reactForm.controls).forEach(field => {
             const control = this.reactForm.get(field);
             control.markAsTouched({ onlySelf: true });
@@ -185,9 +200,11 @@ export class DriverComponent implements OnInit {
         };
 
         this.service.putDriver(obj).subscribe((res)=>{
+          this.showToasterSuccess()
           console.log(res);
           
         },(err)=>{
+          this.showToasterError()
           console.log(err);
           
         })
@@ -212,8 +229,10 @@ export class DriverComponent implements OnInit {
   
           this.service.DeleteDriver(obj).subscribe((res)=>{
             console.log(res);
+            this.showToasterSuccess()
             
           },(err)=>{
+            this.showToasterError()
             console.log(err);
             
           })

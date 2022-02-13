@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 
 
 export class MappingHistoricTripsComponent implements OnInit {
+
+  reloadTextBtn = "Choose Another Date"
   public data: string[] = ['Snooker', 'Tennis', 'Cricket', 'Football', 'Rugby'];
   public data1: string[] = ['Hassan', 'Kordi', 'Cricket', 'Football', 'Rugby'];
   buses: any = [];

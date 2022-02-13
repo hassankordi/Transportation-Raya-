@@ -109,6 +109,7 @@
       [pageSettings]='pageSettings'
        [editSettings]='editSettings'
        (commandClick)='clickHandler($event)'
+       
        >
         <e-columns>
             <e-column field='id' headerText='ID' width='120' textAlign='Right' isPrimaryKey='true' [validationRules]=''></e-column>
@@ -116,7 +117,21 @@
             <e-column field='speed' headerText='speed' width='120' textAlign='Right' [validationRules]=''></e-column>
             <e-column field='cardUniID' headerText='cardUniID' width='120' textAlign='Right' [validationRules]=''></e-column>
             <e-column field='balance' headerText='Balance' width='120' textAlign='Right'  [validationRules]=''></e-column>
-            <!-- <e-column field='status' headerText='Status' width='120' textAlign='Right'  [validationRules]=''></e-column> -->
+            <e-column field='status' headerText='Status' width='120' textAlign='Right'  [validationRules]=''>
+                <!-- <ng-template #template let-data>
+                    <div
+                      *ngIf="data.status != 'Ended'; else login"
+                      class="statustemp e-activecolor"
+                    >
+                      <span class="statustxt e-activecolor">{{ data.status }}</span>
+                    </div>
+                    <ng-template #login>
+                      <div class="statustemp e-inactivecolor">
+                        <span class="statustxt e-inactivecolor">{{ data.status }}</span>
+                      </div>
+                    </ng-template>
+                  </ng-template> -->
+            </e-column>
 
             <!-- editType='numericedit' -->
             <!-- editType='numericedit' -->
