@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 
 export class MappingHistoricTripsComponent implements OnInit {
 
+  isOpen: boolean = true
   reloadTextBtn = "Choose Another Date"
   public data: string[] = ['Snooker', 'Tennis', 'Cricket', 'Football', 'Rugby'];
   public data1: string[] = ['Hassan', 'Kordi', 'Cricket', 'Football', 'Rugby'];
@@ -29,11 +30,11 @@ export class MappingHistoricTripsComponent implements OnInit {
 
 
 
-  constructor(private _ApiServiceService: ApiServiceService , private date :DatePipe) {
+  constructor(private _ApiServiceService: ApiServiceService, private date: DatePipe) {
 
 
   }
- 
+
   ngOnInit(): void {
 
 
@@ -71,18 +72,33 @@ export class MappingHistoricTripsComponent implements OnInit {
       this.tripDate = res
     })
   }
-  ngOnDestroy() {
-    window.location.reload();
- }
-  reload(){
+  // ngOnDestroy() {
+  //   window.location.reload();
+  // }
+  reload() {
     // alert("reload")
-    window.location.reload();
+    this.isOpen = !this.isOpen
+    // alert(this.isOpen)
+    // window.location.reload();
   }
-  onde
+  // onde
   onDateChange(tripId) {
     console.log(tripId)
+    this.isOpen = false
 
-    this._ApiServiceService.onDateChange.next(tripId)
+    // alert(this.isOpen)
+  //  if()
+  setTimeout(() => {
+     
+    this.isOpen = true
+    
+  }, 50);
+  
+    setTimeout(() => {
+     
+      this._ApiServiceService.onDateChange.next(tripId)
+      
+    }, 100);
     // JSON.stringify(localStorage.setItem('dataSource',tripId))   
     // window.location.reload();
     this.checked = true;
@@ -94,5 +110,5 @@ export class MappingHistoricTripsComponent implements OnInit {
     })
   }
 
- 
+
 }

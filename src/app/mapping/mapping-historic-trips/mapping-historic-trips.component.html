@@ -6,7 +6,7 @@
             </div>
             <div class="col-9 ">
                      <mat-form-field >
-                            <mat-select [disabled]="checked" >
+                            <mat-select   >
                               <mat-option *ngFor="let driver of drivers" [value]="driver.cardUniID" (click)="onDriverChange(driver.cardUniID)" >
                                 {{driver.name}}
                               </mat-option>
@@ -20,7 +20,7 @@
             </div>
             <div class="col-9 ">
                      <mat-form-field >
-                            <mat-select  [disabled]="checked" >
+                            <mat-select    >
                               <mat-option *ngFor="let route of routes" [value]="route.id"  (click)="onRouteChange(route.id)">
                                 {{route.name}}
                               </mat-option>
@@ -34,7 +34,7 @@
             </div>
             <div class="col-9 " >
                     <mat-form-field >
-                            <mat-select  [disabled]="checked" [disabled]="disabledFlag">
+                            <mat-select    [disabled]="disabledFlag">
                               
                               <mat-option *ngFor="let bus of buses" [value]="bus.terminalID" (click)="onBusChange(bus.terminalID)">
                                 {{bus.palletNumber}}
@@ -49,7 +49,7 @@
             </div>
             <div class="col-9 ">
                      <mat-form-field >
-                            <mat-select [disabled]="checked" [disabled]="disabledFlag">
+                            <mat-select   [disabled]="disabledFlag">
                               <mat-option *ngFor="let date of tripDate" [value]="date.tripID" (click)="onDateChange(date.tripID)">
                                 {{date.date | date: "medium" }}
                               </mat-option>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <!-- innerText is a property in angular and it takes a string  -->
-        <button *ngIf="checked" (click)="reload()" class="btn btn-info my-3 text-light" [innerText]="reloadTextBtn"></button>
+        <!-- <button *ngIf="checked" (click)="reload()" class="btn btn-info my-3 text-light" [innerText]="reloadTextBtn"></button> -->
     <div class="e-sample-resize-container e-card-resize-container">
         <div class='row'>
             <div class="row card-layout">
@@ -129,7 +129,8 @@
     </div>
     <div class="map-to-active border">
      <!-- <app-historical-map></app-historical-map>  -->
-         <app-historical-map [MyId]='fatouh'></app-historical-map>  
+     <!-- [MyId]='fatouh' -->
+         <app-historical-map *ngIf="isOpen"></app-historical-map>  
  
       <!-- <app-map></app-map> -->
     </div>

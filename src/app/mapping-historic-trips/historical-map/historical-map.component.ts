@@ -61,12 +61,15 @@ export class HistoricalMapComponent implements OnInit {
   constructor(private http: HttpClient, private API: ApiServiceService, private router: Router) {
 
 
+// console.log(this.id);
+// alert(this.id)
+
   }
 
 
-  ngOnDestroy() {
-    window.location.reload();
- }
+//   ngOnDestroy() {
+//     window.location.reload();
+//  }
 
   ngOnInit(): void {
     let arr = [];
