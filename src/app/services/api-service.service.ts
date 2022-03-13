@@ -35,7 +35,8 @@ export class ApiServiceService {
   constructor(private http: HttpClient) {}
 
   getSpeedChart(id):Observable<any>{
-return this.http.get(`http://192.168.1.51/transport/api/Trips/TripSpeedGraph?TripId=${id as number}`)
+// return this.http.get(`http://192.168.1.51/transport/api/Trips/TripSpeedGraph?TripId=${id as number}`)
+return this.http.get(environment.sourceUrl +`/TripReads/TripSpeedGraph?TripId=${id as number}`)
   }
 
 
